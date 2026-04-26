@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Agenda Digital — Tu fuente de noticias confiable. Política, economía, deportes, tecnología, cultura y más.">
+  <title>Agenda Digital — Noticias de Hoy</title>
+  <link rel="stylesheet" href="index.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📰</text></svg>">
+</head>
+<body>
+
+  <!-- ================================================================
+       CINEMATIC LOADING SCREEN
+       ================================================================ -->
+  <div class="loader" id="loader">
+    <!-- Pulse background -->
+    <div class="loader__pulse"></div>
+
+    <!-- Corner decorative SVGs -->
+    <svg class="loader__corner loader__corner--tl" viewBox="0 0 60 60"><line x1="0" y1="0" x2="60" y2="0"/><line x1="0" y1="0" x2="0" y2="60"/></svg>
+    <svg class="loader__corner loader__corner--tr" viewBox="0 0 60 60"><line x1="0" y1="0" x2="60" y2="0"/><line x1="0" y1="0" x2="0" y2="60"/></svg>
+    <svg class="loader__corner loader__corner--bl" viewBox="0 0 60 60"><line x1="0" y1="0" x2="60" y2="0"/><line x1="0" y1="0" x2="0" y2="60"/></svg>
+    <svg class="loader__corner loader__corner--br" viewBox="0 0 60 60"><line x1="0" y1="0" x2="60" y2="0"/><line x1="0" y1="0" x2="0" y2="60"/></svg>
+
+    <!-- Animated SVG Logo -->
+    <svg class="loader__logo-svg" viewBox="0 0 500 120" xmlns="http://www.w3.org/2000/svg">
+      <text x="50%" y="60" text-anchor="middle" class="loader__logo-text">Agenda</text>
+      <text x="50%" y="105" text-anchor="middle" class="loader__logo-text loader__logo-text--accent">DIGITAL</text>
+    </svg>
+
+    <!-- Red sweep line -->
+    <div class="loader__line"></div>
+
+    <!-- Pulsing dots -->
+    <div class="loader__dots">
+      <div class="loader__dot"></div>
+      <div class="loader__dot"></div>
+      <div class="loader__dot"></div>
+      <div class="loader__dot"></div>
+    </div>
+
+    <!-- Tagline -->
+    <span class="loader__tagline">Periodismo independiente y veraz</span>
+  </div>
+
+  <!-- ================================================================
+       TOP BAR
+       ================================================================ -->
+  <div class="top-bar" id="top-bar">
+    <div class="container">
+      <span class="top-bar__date" id="current-date"></span>
+      <div class="top-bar__links">
+        <a href="#">Edición Impresa</a>
+        <a href="#">Contacto</a>
+        <a href="#">Quiénes Somos</a>
+        <a href="#newsletter-section">Suscríbete</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================
+       MASTHEAD
+       ================================================================ -->
+  <header class="masthead">
+    <!-- SVG background pattern -->
+    <svg class="masthead__pattern" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <defs><pattern id="grid-pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#1E293B" stroke-width="0.5"/>
+      </pattern></defs>
+      <rect width="200" height="200" fill="url(#grid-pattern)"/>
+    </svg>
+    <div class="container">
+      <div class="masthead__brand">
+        <a href="#inicio" class="masthead__logo" data-nav="inicio">Agenda <span>Digital</span></a>
+        <span class="masthead__tagline">Periodismo independiente y veraz</span>
+      </div>
+      <div class="masthead__search">
+        <input type="search" class="masthead__search-input" placeholder="Buscar noticias..." aria-label="Buscar" id="search-input">
+        <button class="masthead__search-btn" aria-label="Buscar" id="search-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+      </div>
+      <button class="hamburger" id="hamburger-btn" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <!-- ================================================================
+       NAVIGATION
+       ================================================================ -->
+  <nav class="main-nav" id="main-nav">
+    <div class="container">
+      <div class="nav-links" id="nav-links">
+        <a href="#inicio" data-nav="inicio" class="active">Inicio</a>
+        <a href="#politica" data-nav="politica">Política</a>
+        <a href="#economia" data-nav="economia">Economía</a>
+        <a href="#deportes" data-nav="deportes">Deportes</a>
+        <a href="#tecnologia" data-nav="tecnologia">Tecnología</a>
+        <a href="#cultura" data-nav="cultura">Cultura</a>
+        <a href="#internacional" data-nav="internacional">Internacional</a>
+        <a href="#opinion" data-nav="opinion">Opinión</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile nav -->
+  <div class="mobile-nav-overlay" id="mobile-overlay"></div>
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="#inicio" data-nav="inicio">Inicio</a>
+    <a href="#politica" data-nav="politica">Política</a>
+    <a href="#economia" data-nav="economia">Economía</a>
+    <a href="#deportes" data-nav="deportes">Deportes</a>
+    <a href="#tecnologia" data-nav="tecnologia">Tecnología</a>
+    <a href="#cultura" data-nav="cultura">Cultura</a>
+    <a href="#internacional" data-nav="internacional">Internacional</a>
+    <a href="#opinion" data-nav="opinion">Opinión</a>
+  </div>
+
+  <!-- ================================================================
+       TICKER
+       ================================================================ -->
+  <div class="ticker">
+    <span class="ticker__label">
+      <svg viewBox="0 0 10 10"><circle cx="5" cy="5" r="4"/></svg>
+      Última hora
+    </span>
+    <div class="ticker__content">
+      <div class="ticker-track" id="ticker-track">
+        <span>Aprobada la reforma energética con amplia mayoría en el Congreso</span>
+        <span>Mercados financieros registran su mejor semana en seis meses</span>
+        <span>Selección Nacional clasifica al Mundial 2026 tras victoria histórica</span>
+        <span>Nueva ley de inteligencia artificial entra en vigor este mes</span>
+        <span>Terremoto de magnitud 5.2 sacude la costa del Pacífico</span>
+        <span>Inflación cae al 2.5% anual, la cifra más baja en ocho años</span>
+        <span>Avances en fusión nuclear prometen energía limpia ilimitada</span>
+        <!-- Duplicated for seamless loop -->
+        <span>Aprobada la reforma energética con amplia mayoría en el Congreso</span>
+        <span>Mercados financieros registran su mejor semana en seis meses</span>
+        <span>Selección Nacional clasifica al Mundial 2026 tras victoria histórica</span>
+        <span>Nueva ley de inteligencia artificial entra en vigor este mes</span>
+        <span>Terremoto de magnitud 5.2 sacude la costa del Pacífico</span>
+        <span>Inflación cae al 2.5% anual, la cifra más baja en ocho años</span>
+        <span>Avances en fusión nuclear prometen energía limpia ilimitada</span>
+      </div>
+    </div>
+  </div>
+
+<main id="main-content">
+<div class="side-ads side-ads--left">
+<div class="side-ad">
+<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+<span>Publicidad</span>
+<span style="font-size:0.6rem;opacity:0.5;">160 × 600</span>
+</div>
+</div>
+<div class="side-ads side-ads--right">
+<div class="side-ad">
+<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+<span>Publicidad</span>
+<span style="font-size:0.6rem;opacity:0.5;">160 × 600</span>
+</div>
+</div>
+<div class="main-content__center">
+
+    <!-- ================================================================
+         PAGE: INICIO (HOME)
+         ================================================================ -->
+    <div class="page active" id="page-inicio" data-page="inicio">
+
+      <!-- HERO -->
+      <section class="hero">
+        <div class="container">
+          <div class="hero__grid reveal">
+            <article class="hero__main">
+              <img src="https://picsum.photos/seed/hero-main/900/500" alt="Cumbre climática mundial" class="hero__main-img" loading="eager">
+              <div class="hero__main-overlay">
+                <span class="hero__main-category">Internacional</span>
+                <h1 class="hero__main-title">Líderes mundiales firman acuerdo histórico para reducir emisiones un 50% para 2030</h1>
+                <p class="hero__main-excerpt">En una cumbre sin precedentes, 195 países se comprometen a tomar medidas drásticas contra el cambio climático con mecanismos vinculantes.</p>
+                <span class="hero__main-meta">Por María González · Hace 2 horas · 8 min de lectura</span>
+              </div>
+            </article>
+            <aside class="hero__side">
+              <article class="hero__side-item">
+                <img src="https://picsum.photos/seed/side1/200/150" alt="Economía" class="hero__side-img" loading="eager">
+                <div class="hero__side-content">
+                  <span class="hero__side-category">Economía</span>
+                  <h2 class="hero__side-title">El banco central mantiene las tasas de interés en mínimos históricos</h2>
+                  <span class="hero__side-meta">Hace 3 horas</span>
+                </div>
+              </article>
+              <article class="hero__side-item">
+                <img src="https://picsum.photos/seed/side2/200/150" alt="Tecnología" class="hero__side-img" loading="lazy">
+                <div class="hero__side-content">
+                  <span class="hero__side-category">Tecnología</span>
+                  <h2 class="hero__side-title">Revolución en la IA: nuevo modelo supera capacidades de razonamiento humano</h2>
+                  <span class="hero__side-meta">Hace 4 horas</span>
+                </div>
+              </article>
+              <article class="hero__side-item">
+                <img src="https://picsum.photos/seed/side3/200/150" alt="Deportes" class="hero__side-img" loading="lazy">
+                <div class="hero__side-content">
+                  <span class="hero__side-category">Deportes</span>
+                  <h2 class="hero__side-title">El clásico rompió récords con más de 80 millones de espectadores</h2>
+                  <span class="hero__side-meta">Hace 5 horas</span>
+                </div>
+              </article>
+              <article class="hero__side-item">
+                <img src="https://picsum.photos/seed/side4/200/150" alt="Ciencia" class="hero__side-img" loading="lazy">
+                <div class="hero__side-content">
+                  <span class="hero__side-category">Ciencia</span>
+                  <h2 class="hero__side-title">NASA confirma hallazgo de moléculas orgánicas en luna de Saturno</h2>
+                  <span class="hero__side-meta">Hace 6 horas</span>
+                </div>
+              </article>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- SVG Wave divider -->
+      <svg class="svg-divider svg-divider--wave" viewBox="0 0 1440 40" preserveAspectRatio="none"><path d="M0,20 C360,40 720,0 1080,20 C1260,30 1360,25 1440,20 L1440,40 L0,40 Z"/></svg>
+
+      <!-- FEATURED -->
+      <section class="featured section-preview--alt">
+        <div class="container">
+          <div class="section__header reveal">
+            <h2 class="section__title">
+              <svg class="section__title-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14 2 9.27l6.91-1.01z"/></svg>
+              Noticias Destacadas
+            </h2>
+          </div>
+          <div class="featured__grid reveal-stagger">
+            <article class="card card--large reveal-child">
+              <div class="card__img-wrap"><img src="https://picsum.photos/seed/feat1/700/400" alt="Reforma educativa" class="card__img" loading="lazy"></div>
+              <div class="card__body">
+                <span class="card__category">Política</span>
+                <h3 class="card__title">Aprobada la mayor reforma educativa en 30 años: así transformará las aulas</h3>
+                <p class="card__excerpt">El proyecto incluye inversión masiva en tecnología, formación docente y reestructuración curricular completa.</p>
+                <div class="card__meta"><span>Carlos Ruiz</span><span>·</span><span>Hace 1 hora</span></div>
+              </div>
+            </article>
+            <article class="card reveal-child">
+              <div class="card__img-wrap"><img src="https://picsum.photos/seed/feat2/400/250" alt="Ciencia" class="card__img" loading="lazy"></div>
+              <div class="card__body">
+                <span class="card__category">Ciencia</span>
+                <h3 class="card__title">Descubren nueva especie marina en las profundidades del Pacífico</h3>
+                <div class="card__meta"><span>Ana Torres</span><span>·</span><span>Hace 3 horas</span></div>
+              </div>
+            </article>
+            <article class="card reveal-child">
+              <div class="card__img-wrap"><img src="https://picsum.photos/seed/feat3/400/250" alt="Economía" class="card__img" loading="lazy"></div>
+              <div class="card__body">
+                <span class="card__category">Economía</span>
+                <h3 class="card__title">Startup local recauda $200 millones en su ronda Serie C</h3>
+                <div class="card__meta"><span>Roberto Lima</span><span>·</span><span>Hace 4 horas</span></div>
+              </div>
+            </article>
+            <article class="card reveal-child">
+              <div class="card__img-wrap"><img src="https://picsum.photos/seed/feat4/400/250" alt="Cultura" class="card__img" loading="lazy"></div>
+              <div class="card__body">
+                <span class="card__category">Cultura</span>
+                <h3 class="card__title">Festival Internacional de Cine anuncia su programación para este año</h3>
+                <div class="card__meta"><span>Lucía Vega</span><span>·</span><span>Hace 5 horas</span></div>
+              </div>
+            </article>
+            <article class="card reveal-child">
+              <div class="card__img-wrap"><img src="https://picsum.photos/seed/feat5/400/250" alt="Salud" class="card__img" loading="lazy"></div>
+              <div class="card__body">
+                <span class="card__category">Salud</span>
+                <h3 class="card__title">Nuevo tratamiento contra el alzheimer muestra resultados prometedores</h3>
+                <div class="card__meta"><span>Dr. Fernando Paz</span><span>·</span><span>Hace 6 horas</span></div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <svg class="svg-divider svg-divider--wave-inv" viewBox="0 0 1440 40" preserveAspectRatio="none"><path d="M0,20 C360,0 720,40 1080,20 C1260,10 1360,15 1440,20 L1440,40 L0,40 Z" fill="#F8FAFC"/></svg>
+
+      <!-- HOME: Section Previews -->
+      <!-- Política preview -->
+      <section class="section-preview">
+        <div class="container">
+          <div class="section__header reveal">
+            <h2 class="section__title">
+              <svg class="section__title-icon" viewBox="0 0 24 24"><path d="M3 3h18v18H3z"/><path d="M8 12h8M8 8h8M8 16h4"/></svg>
+              Política
+            </h2>
+            <a href="#politica" data-nav="politica" class="section__more">Ver sección <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></a>
+          </div>
+          <div class="preview-grid reveal-stagger">
+            <article class="preview-card reveal-child" data-nav="politica">
+              <div class="preview-card__img-wrap"><img src="https://picsum.photos/seed/pol1/400/260" alt="Congreso" class="preview-card__img" loading="lazy"></div>
+              <div class="preview-card__body"><h3 class="preview-card__title">El Congreso debate la nueva ley de transparencia gubernamental</h3><span class="preview-card__meta">Juan Méndez · Hace 2 horas</span></div>
+            </article>
+            <article class="preview-card reveal-child" data-nav="politica">
+              <div class="preview-card__img-wrap"><img src="https://picsum.photos/seed/pol2/400/260" alt="Elecciones" class="preview-card__img" loading="lazy"></div>
+              <div class="preview-card__body"><h3 class="preview-card__title">Encuestas revelan empate técnico a dos meses de las elecciones</h3><span class="preview-card__meta">Patricia Solano · Hace 4 horas</span></div>
+            </article>
+            <article class="preview-card reveal-child" data-nav="politica">
+              <div class="preview-card__img-wrap"><img src="https://picsum.photos/seed/pol3/400/260" alt="Diplomacia" class="preview-card__img" loading="lazy"></div>
+              <div class="preview-card__body"><h3 class="preview-card__title">Cancillería anuncia nueva estrategia comercial con Asia</h3><span class="preview-card__meta">Andrea Campos · Hace 7 horas</span></div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Economía preview -->
+      <svg class="svg-divider svg-divider--wave" viewBox="0 0 1440 40" preserveAspectRatio="none"><path d="M0,10 C480,40 960,0 1440,30 L1440,40 L0,40 Z"/></svg>
+      <section class="section-preview section-preview--alt">
+        <div class="container">
+          <div class="section__header reveal">
+            <h2 class="section__title">
+              <svg class="section__title-icon" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              Economía
+            </h2>
+            <a href="#economia" data-nav="economia" class="section__more">Ver sección <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></a>
+          </div>
+          <div class="preview-grid reveal-stagger">
+            <article class="preview-card reveal-child" data-nav="economia">
+              <div class="preview-card__img-wrap"><img src="https://picsum.photos/seed/eco1/400/260" alt="Mercados" class="preview-card__img" loading="lazy"></div>
+              <div class="preview-card__body"><h3 class="preview-card__title">Wall Street cierra en máximos históricos impulsado por el sector tech</h3><span class="preview-card__meta">Ricardo Montoya · Hace 1 hora</span></div>
+            </article>
+            <article class="preview-card reveal-child" data-nav="economia">
+              <div class="preview-card__img-wrap"><img src="https://picsum.photos/seed/eco2/400/260" alt="Exportaciones" class="preview-card__img" loading="lazy"></div>
+              <div class="preview-card__body"><h3 class="preview-card__title">Exportaciones agrícolas crecen un 18% con nuevos acuerdos</h3><span class="preview-card__meta">Daniela Herrera · Hace 5 horas</span></div>
+            </article>
+            <article class="preview-card reveal-child" data-nav="economia">
+              <div class="preview-card__img-wrap"><img src="https://picsum.photos/seed/eco3/400/260" alt="Startups" class="preview-card__img" loading="lazy"></div>
+              <div class="preview-card__body"><h3 class="preview-card__title">Startups latinoamericanas alcanzan cifras récord de inversión</h3><span class="preview-card__meta">Martín Salazar · Hace 8 horas</span></div>
+            </article>
+          </div>
+        </div>
+      </section>
+      <svg class="svg-divider svg-divider--wave-inv" viewBox="0 0 1440 40" preserveAspectRatio="none"><path d="M0,30 C480,0 960,40 1440,10 L1440,40 L0,40 Z" fill="#F8FAFC"/></svg>
+
+      <!-- Deportes preview -->
+      <section class="section-preview">
+        <div class="container">
+          <div class="section__header reveal">
+            <h2 class="section__title">
+              <svg class="section__title-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0110 10"/><path d="M2 12h4M18 12h4M12 2v4M12 18v4"/></svg>
+              Deportes
+            </h2>
+            <a href="#deportes" data-nav="deportes" class="section__more">Ver sección <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></a>
+          </div>
+          <div class="preview-grid reveal-stagger">
+            <article class="preview-card reveal-child" data-nav="deportes">
+              <div class="preview-card__img-wrap"><img src="https://picsum.photos/seed/dep1/400/260" alt="Fútbol" class="preview-card__img" loading="lazy"></div>
+              <div class="preview-card__body"><h3 class="preview-card__title">El campeón defiende su corona con victoria aplastante en semifinales</h3><span class="preview-card__meta">Alejandro Vargas · Hace 3 horas</span></div>
+            </article>
+            <article class="preview-card reveal-child" data-nav="deportes">
+              <div class="preview-card__img-wrap"><img src="https://picsum.photos/seed/dep2/400/260" alt="Tenis" class="preview-card__img" loading="lazy"></div>
+              <div class="preview-card__body"><h3 class="preview-card__title">Joven promesa de 19 años accede a la final del Grand Slam</h3><span class="preview-card__meta">Laura Pinto · Hace 6 horas</span></div>
+            </article>
+            <article class="preview-card reveal-child" data-nav="deportes">
+              <div class="preview-card__img-wrap"><img src="https://picsum.photos/seed/dep3/400/260" alt="Olímpicos" class="preview-card__img" loading="lazy"></div>
+              <div class="preview-card__body"><h3 class="preview-card__title">Comité Olímpico revela sedes y calendario de los próximos Juegos</h3><span class="preview-card__meta">Diego Morales · Hace 9 horas</span></div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ACCORDION: Temas del Día -->
+      <svg class="svg-divider svg-divider--wave" viewBox="0 0 1440 40" preserveAspectRatio="none"><path d="M0,20 C360,35 720,5 1080,20 C1260,28 1360,22 1440,20 L1440,40 L0,40 Z"/></svg>
+      <section class="section-preview section-preview--alt">
+        <div class="container">
+          <div class="section__header reveal">
+            <h2 class="section__title">
+              <svg class="section__title-icon" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+              Temas del Día
+            </h2>
+          </div>
+          <div class="hz-accordion reveal">
+            <article class="hz-accordion__item" onclick="window.location.hash='politica'">
+              <img src="https://picsum.photos/seed/hz1/800/800" alt="Política" class="hz-accordion__img" loading="lazy">
+              <span class="hz-accordion__label">Política</span>
+              <div class="hz-accordion__overlay">
+                <span class="hz-accordion__category">Política</span>
+                <h3 class="hz-accordion__title">El Senado aprueba reforma constitucional histórica</h3>
+                <p class="hz-accordion__excerpt">Con 112 votos a favor, se modifica el artículo 42 asegurando derechos de segunda generación.</p>
+                <div class="hz-accordion__meta">Hace 2 horas · Redacción</div>
+              </div>
+            </article>
+            <article class="hz-accordion__item" onclick="window.location.hash='economia'">
+              <img src="https://picsum.photos/seed/hz2/800/800" alt="Economía" class="hz-accordion__img" loading="lazy">
+              <span class="hz-accordion__label">Economía</span>
+              <div class="hz-accordion__overlay">
+                <span class="hz-accordion__category">Economía</span>
+                <h3 class="hz-accordion__title">La inflación cae al 2.5%, la mejor cifra en ocho años</h3>
+                <p class="hz-accordion__excerpt">El Banco Central proyecta un cierre de año con crecimiento sostenido sin presión sobre los precios.</p>
+                <div class="hz-accordion__meta">Hace 4 horas · Finanzas</div>
+              </div>
+            </article>
+            <article class="hz-accordion__item" onclick="window.location.hash='deportes'">
+              <img src="https://picsum.photos/seed/hz3/800/800" alt="Deportes" class="hz-accordion__img" loading="lazy">
+              <span class="hz-accordion__label">Deportes</span>
+              <div class="hz-accordion__overlay">
+                <span class="hz-accordion__category">Deportes</span>
+                <h3 class="hz-accordion__title">Clasificación épica: El equipo remonta y avanza a semifinales</h3>
+                <p class="hz-accordion__excerpt">Un gol en el tiempo de descuento sella una victoria memorable bajo la lluvia torrencial.</p>
+                <div class="hz-accordion__meta">Hace 5 horas · Deportes</div>
+              </div>
+            </article>
+            <article class="hz-accordion__item" onclick="window.location.hash='politica'">
+              <img src="https://picsum.photos/seed/hz4/800/800" alt="Política" class="hz-accordion__img" loading="lazy">
+              <span class="hz-accordion__label">Política</span>
+              <div class="hz-accordion__overlay">
+                <span class="hz-accordion__category">Política</span>
+                <h3 class="hz-accordion__title">Gira presidencial por Europa consolida alianzas</h3>
+                <p class="hz-accordion__excerpt">El mandatario firma acuerdos de inversión en tecnología verde y educación superior.</p>
+                <div class="hz-accordion__meta">Hace 6 horas · Internacional</div>
+              </div>
+            </article>
+            <article class="hz-accordion__item" onclick="window.location.hash='economia'">
+              <img src="https://picsum.photos/seed/hz5/800/800" alt="Economía" class="hz-accordion__img" loading="lazy">
+              <span class="hz-accordion__label">Economía</span>
+              <div class="hz-accordion__overlay">
+                <span class="hz-accordion__category">Economía</span>
+                <h3 class="hz-accordion__title">Subida récord en la bolsa tras el reporte de desempleo</h3>
+                <p class="hz-accordion__excerpt">Los mercados reaccionan con euforia a la creación de 300,000 nuevos puestos de trabajo.</p>
+                <div class="hz-accordion__meta">Hace 8 horas · Mercados</div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+      <svg class="svg-divider svg-divider--wave-inv" viewBox="0 0 1440 40" preserveAspectRatio="none"><path d="M0,20 C360,5 720,35 1080,20 C1260,12 1360,18 1440,20 L1440,40 L0,40 Z" fill="#F8FAFC"/></svg>
+
+    </div><!-- /page-inicio -->
+
+    <!-- ================================================================
+         PAGE: POLÍTICA
+         ================================================================ -->
+    <div class="page" id="page-politica" data-page="politica">
+      <div class="page-banner">
+        <img src="https://picsum.photos/seed/banner-pol/1400/400" alt="Política" class="page-banner__img">
+        <div class="page-banner__content">
+          <span class="page-banner__category"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3z"/><path d="M8 12h8M8 8h8M8 16h4"/></svg> Sección</span>
+          <h1 class="page-banner__title">Política</h1>
+          <p class="page-banner__desc">Análisis, debate y cobertura de la actualidad política nacional e internacional.</p>
+        </div>
+      </div>
+      <div class="container"><div class="content-layout">
+        <div>
+          <div class="news-list reveal-stagger">
+            <article class="news-item reveal-child"><div class="news-item__img-wrap"><img src="https://picsum.photos/seed/pol1/400/260" alt="" class="news-item__img" loading="lazy"></div><div class="news-item__content"><span class="news-item__category">Política Nacional</span><h3 class="news-item__title">El Congreso debate la nueva ley de transparencia gubernamental</h3><p class="news-item__excerpt">La iniciativa busca crear un sistema de datos abiertos que permita a los ciudadanos fiscalizar el gasto público en tiempo real.</p><span class="news-item__meta">Por Juan Méndez · Hace 2 horas</span></div></article>
+            <article class="news-item reveal-child"><div class="news-item__img-wrap"><img src="https://picsum.photos/seed/pol2/400/260" alt="" class="news-item__img" loading="lazy"></div><div class="news-item__content"><span class="news-item__category">Elecciones</span><h3 class="news-item__title">Encuestas revelan empate técnico a dos meses de las elecciones municipales</h3><p class="news-item__excerpt">Los candidatos de los tres principales partidos se encuentran en un margen de error estadístico según el último sondeo nacional.</p><span class="news-item__meta">Por Patricia Solano · Hace 4 horas</span></div></article>
+            <article class="news-item reveal-child"><div class="news-item__img-wrap"><img src="https://picsum.photos/seed/pol3/400/260" alt="" class="news-item__img" loading="lazy"></div><div class="news-item__content"><span class="news-item__category">Política Exterior</span><h3 class="news-item__title">Cancillería anuncia nueva estrategia de relaciones comerciales con Asia</h3><p class="news-item__excerpt">El plan incluye la apertura de cinco nuevas agregadurías comerciales y la negociación de tres tratados de libre comercio.</p><span class="news-item__meta">Por Andrea Campos · Hace 7 horas</span></div></article>
+            <article class="news-item reveal-child"><div class="news-item__img-wrap"><img src="https://picsum.photos/seed/pol4/400/260" alt="" class="news-item__img" loading="lazy"></div><div class="news-item__content"><span class="news-item__category">Congreso</span><h3 class="news-item__title">Senado aprueba la reforma al sistema de pensiones con votos de tres bancadas</h3><p class="news-item__excerpt">La nueva ley aumenta la cobertura a trabajadores independientes y establece un fondo solidario para personas mayores de 65 años.</p><span class="news-item__meta">Por Luis Herrera · Hace 10 horas</span></div></article>
+            <article class="news-item reveal-child"><div class="news-item__img-wrap"><img src="https://picsum.photos/seed/pol5/400/260" alt="" class="news-item__img" loading="lazy"></div><div class="news-item__content"><span class="news-item__category">Judicial</span><h3 class="news-item__title">Corte Suprema emite fallo sobre libertad de prensa que sienta precedente histórico</h3><p class="news-item__excerpt">El tribunal resolvió por unanimidad que los periodistas tienen derecho a proteger sus fuentes en investigaciones de interés público.</p><span class="news-item__meta">Por Valeria Soto · Hace 12 horas</span></div></article>
+          </div>
+        </div>
+        <aside class="sidebar" id="sidebar-politica"></aside>
+      </div></div>
+    </div>
+
+    <!-- ================================================================
+         PAGE: ECONOMÍA
+         ================================================================ -->
+    <div class="page" id="page-economia" data-page="economia">
+      <div class="page-banner">
+        <img src="https://picsum.photos/seed/banner-eco/1400/400" alt="Economía" class="page-banner__img">
+        <div class="page-banner__content">
+          <span class="page-banner__category"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg> Sección</span>
+          <h1 class="page-banner__title">Economía</h1>
+          <p class="page-banner__desc">Mercados, finanzas, emprendimiento y la economía que mueve al mundo.</p>
+        </div>
+      </div>
+      <div class="container"><div class="content-layout">
+        <div>
+          <div class="news-list reveal-stagger">
+            <article class="news-item reveal-child"><div class="news-item__img-wrap"><img src="https://picsum.photos/seed/eco1/400/260" alt="" class="news-item__img" loading="lazy"></div><div class="news-item__content"><span class="news-item__category">Mercados</span><h3 class="news-item__title">Wall Street cierra en máximos históricos impulsado por el sector tecnológico</h3><p class="news-item__excerpt">El índice S&P 500 superó los 6,000 puntos por primera vez. Las acciones de IA lideraron con alzas superiores al 5%.</p><span class="news-item__meta">Por Ricardo Montoya · Hace 1 hora</span></div></article>
+            <article class="news-item reveal-child"><div class="news-item__img-wrap"><img src="https://picsum.photos/seed/eco2/400/260" alt="" class="news-item__img" loading="lazy"></div><div class="news-item__content"><span class="news-item__category">Comercio</span><h3 class="news-item__title">Exportaciones agrícolas crecen un 18% gracias a nuevos acuerdos comerciales</h3><p class="news-item__excerpt">El sector agroexportador celebra acuerdos bilaterales con cinco países asiáticos por valor de $3 mil millones.</p><span class="news-item__meta">Por Daniela Herrera · Hace 5 horas</span></div></article>
+            <article class="news-item reveal-child"><div class="news-item__img-wrap"><img src="https://picsum.photos/seed/eco3/400/260" alt="" class="news-item__img" loading="lazy"></div><div class="news-item__content"><span class="news-item__category">Emprendimiento</span><h3 class="news-item__title">El ecosistema de startups latinoamericanas alcanza cifras récord de inversión</h3><p class="news-item__excerpt">Con más de $15 mil millones captados, las startups de la región dan un salto en innovación y escalamiento global.</p><span class="news-item__meta">Por Martín Salazar · Hace 8 horas</span></div></article>
+            <article class="news-item reveal-child"><div class="news-item__img-wrap"><img src="https://picsum.photos/seed/eco4/400/260" alt="" class="news-item__img" loading="lazy"></div><div class="news-item__content"><span class="news-item__category">Finanzas Personales</span><h3 class="news-item__title">Cinco estrategias para proteger tus ahorros en tiempos de inflación</h3><p class="news-item__excerpt">Expertos financieros recomiendan diversificar entre fondos indexados, bienes raíces y criptomonedas reguladas.</p><span class="news-item__meta">Por Carolina Ruiz · Hace 11 horas</span></div></article>
+          </div>
+        </div>
+        <aside class="sidebar" id="sidebar-economia"></aside>
+      </div></div>
+    </div>
+
+    <!-- ================================================================
+         PAGE: DEPORTES
+         ================================================================ -->
+    <div class="page" id="page-deportes" data-page="deportes">
+      <div class="page-banner">
+        <img src="https://picsum.photos/seed/banner-dep/1400/400" alt="Deportes" class="page-banner__img">
+        <div class="page-banner__content">
+          <span class="page-banner__category"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Sección</span>
+          <h1 class="page-banner__title">Deportes</h1>
+          <p class="page-banner__desc">Fútbol, tenis, olimpismo y toda la acción del mundo deportivo.</p>
+        </div>
+      </div>
+      <div class="container"><div class="content-layout">
+        <div>
+          <div class="news-list reveal-stagger">
+            <article class="news-item reveal-child"><div class="news-item__img-wrap"><img src="https://picsum.photos/seed/dep1/400/260" alt="" class="news-item__img" loading="lazy"></div><div class="news-item__content"><span class="news-item__category">Fútbol</span><h3 class="news-item__title">El campeón defiende su corona con una victoria aplastante en semifinales</h3><p class="news-item__excerpt">Con un marcador de 4-1, el equipo demostró por qué es el favorito. El delantero estrella anotó un hat-trick histórico.</p><span class="news-item__meta">Por Alejandro Vargas · Hace 3 horas</span></div></article>
+            <article class="news-item reveal-child"><div class="news-item__img-wrap"><img src="https://picsum.photos/seed/dep2/400/260" alt="" class="news-item__img" loading="lazy"></div><div class="news-item__content"><span class="news-item__category">Tenis</span><h3 class="news-item__title">Joven promesa de 19 años sorprende al mundo y accede a la final del Grand Slam</h3><p class="news-item__excerpt">Clasificado en el puesto 78 del ranking, venció a tres cabezas de serie consecutivas en un torneo memorable.</p><span class="news-item__meta">Por Laura Pinto · Hace 6 horas</span></div></article>
+            <article class="news-item reveal-child"><div class="news-item__img-wrap"><img src="https://picsum.photos/seed/dep3/400/260" alt="" class="news-item__img" loading="lazy"></div><div class="news-item__content"><span class="news-item__category">Olímpicos</span><h3 class="news-item__title">Comité Olímpico revela las sedes y el calendario de los próximos Juegos</h3><p class="news-item__excerpt">La organización presentó el plan maestro: 42 disciplinas, 18 sedes y una inversión de $12 mil millones.</p><span class="news-item__meta">Por Diego Morales · Hace 9 horas</span></div></article>
+          </div>
+        </div>
+        <aside class="sidebar" id="sidebar-deportes"></aside>
+      </div></div>
+    </div>
+
+    <!-- ================================================================
+         PAGE: TECNOLOGÍA
+         ================================================================ -->
+    <div class="page" id="page-tecnologia" data-page="tecnologia">
+      <div class="page-banner">
+        <img src="https://picsum.photos/seed/banner-tech/1400/400" alt="Tecnología" class="page-banner__img">
+        <div class="page-banner__content">
+          <span class="page-banner__category"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> Sección</span>
+          <h1 class="page-banner__title">Tecnología</h1>
+          <p class="page-banner__desc">Innovación, inteligencia artificial, ciberseguridad y el futuro digital.</p>
+        </div>
+      </div>
+      <div class="container"><div class="content-layout">
+        <div>
+          <div class="news-list reveal-stagger">
+            <article class="news-item reveal-child"><div class="news-item__img-wrap"><img src="https://picsum.photos/seed/tech1/400/260" alt="" class="news-item__img" loading="lazy"></div><div class="news-item__content"><span class="news-item__category">Inteligencia Artificial</span><h3 class="news-item__title">Google presenta su nuevo modelo de IA capaz de codificar aplicaciones completas</h3><p class="news-item__excerpt">El modelo diseña, programa y despliega aplicaciones web funcionales a partir de descripciones en lenguaje natural.</p><span class="news-item__meta">Por Sebastián Rojas · Hace 2 horas</span></div></article>
+            <article class="news-item reveal-child"><div class="news-item__img-wrap"><img src="https://picsum.photos/seed/tech2/400/260" alt="" class="news-item__img" loading="lazy"></div><div class="news-item__content"><span class="news-item__category">Ciberseguridad</span><h3 class="news-item__title">Brecha de seguridad masiva expone datos de 50 millones de usuarios</h3><p class="news-item__excerpt">Una vulnerabilidad crítica en una plataforma social permitió acceder a información personal de millones de personas.</p><span class="news-item__meta">Por Elena Fuentes · Hace 5 horas</span></div></article>
+            <article class="news-item reveal-child"><div class="news-item__img-wrap"><img src="https://picsum.photos/seed/tech3/400/260" alt="" class="news-item__img" loading="lazy"></div><div class="news-item__content"><span class="news-item__category">Movilidad</span><h3 class="news-item__title">La nueva batería de estado sólido promete 1,000 km de autonomía</h3><p class="news-item__excerpt">El avance podría revolucionar la industria automotriz eliminando la ansiedad de autonomía en vehículos eléctricos.</p><span class="news-item__meta">Por Gabriel Ortiz · Hace 7 horas</span></div></article>
+          </div>
+        </div>
+        <aside class="sidebar" id="sidebar-tecnologia"></aside>
+      </div></div>
+    </div>
+
+    <!-- ================================================================
+         PAGE: CULTURA
+         ================================================================ -->
+    <div class="page" id="page-cultura" data-page="cultura">
+      <div class="page-banner">
+        <img src="https://picsum.photos/seed/banner-cul/1400/400" alt="Cultura" class="page-banner__img">
+        <div class="page-banner__content">
+          <span class="page-banner__category"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg> Sección</span>
+          <h1 class="page-banner__title">Cultura</h1>
+          <p class="page-banner__desc">Arte, cine, música, literatura y entretenimiento.</p>
+        </div>
+      </div>
+      <div class="container"><div class="content-layout">
+        <div>
+          <div class="news-list reveal-stagger">
+            <article class="news-item reveal-child"><div class="news-item__img-wrap"><img src="https://picsum.photos/seed/cul1/400/260" alt="" class="news-item__img" loading="lazy"></div><div class="news-item__content"><span class="news-item__category">Arte</span><h3 class="news-item__title">El Museo Nacional inaugura la mayor retrospectiva de arte contemporáneo</h3><p class="news-item__excerpt">La exposición reúne 250 obras de 40 artistas latinoamericanos con entrada gratuita hasta septiembre.</p><span class="news-item__meta">Por Valentina Cruz · Hace 4 horas</span></div></article>
+            <article class="news-item reveal-child"><div class="news-item__img-wrap"><img src="https://picsum.photos/seed/cul2/400/260" alt="" class="news-item__img" loading="lazy"></div><div class="news-item__content"><span class="news-item__category">Streaming</span><h3 class="news-item__title">Nueva serie de thriller psicológico rompe récords de audiencia en su estreno</h3><p class="news-item__excerpt">Con 45 millones de visualizaciones en 72 horas, se perfila como la serie más vista del año.</p><span class="news-item__meta">Por Camila Ospina · Hace 6 horas</span></div></article>
+            <article class="news-item reveal-child"><div class="news-item__img-wrap"><img src="https://picsum.photos/seed/cul3/400/260" alt="" class="news-item__img" loading="lazy"></div><div class="news-item__content"><span class="news-item__category">Música</span><h3 class="news-item__title">Festival de verano confirma lineup con artistas de talla mundial</h3><p class="news-item__excerpt">80 artistas durante tres días. Las entradas anticipadas se agotaron en menos de 15 minutos.</p><span class="news-item__meta">Por Isabel Reyes · Hace 8 horas</span></div></article>
+          </div>
+        </div>
+        <aside class="sidebar" id="sidebar-cultura"></aside>
+      </div></div>
+    </div>
+
+    <!-- ================================================================
+         PAGE: INTERNACIONAL
+         ================================================================ -->
+    <div class="page" id="page-internacional" data-page="internacional">
+      <div class="page-banner">
+        <img src="https://picsum.photos/seed/banner-int/1400/400" alt="Internacional" class="page-banner__img">
+        <div class="page-banner__content">
+          <span class="page-banner__category"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg> Sección</span>
+          <h1 class="page-banner__title">Internacional</h1>
+          <p class="page-banner__desc">Lo que sucede en el mundo: geopolítica, conflictos y cooperación global.</p>
+        </div>
+      </div>
+      <div class="container"><div class="content-layout">
+        <div>
+          <div class="news-list reveal-stagger">
+            <article class="news-item reveal-child"><div class="news-item__img-wrap"><img src="https://picsum.photos/seed/int1/400/260" alt="" class="news-item__img" loading="lazy"></div><div class="news-item__content"><span class="news-item__category">Diplomacia</span><h3 class="news-item__title">La Unión Europea aprueba paquete de sanciones económicas sin precedentes</h3><p class="news-item__excerpt">27 naciones acordaron por unanimidad medidas que incluyen congelamiento de activos y restricciones comerciales.</p><span class="news-item__meta">Por Andrés Molina · Hace 2 horas</span></div></article>
+            <article class="news-item reveal-child"><div class="news-item__img-wrap"><img src="https://picsum.photos/seed/int2/400/260" alt="" class="news-item__img" loading="lazy"></div><div class="news-item__content"><span class="news-item__category">Asia</span><h3 class="news-item__title">China lanza la estación espacial permanente más avanzada del mundo</h3><p class="news-item__excerpt">La nueva estación orbital, con capacidad para seis astronautas, marca un hito en la carrera espacial.</p><span class="news-item__meta">Por Felipe Chang · Hace 5 horas</span></div></article>
+            <article class="news-item reveal-child"><div class="news-item__img-wrap"><img src="https://picsum.photos/seed/int3/400/260" alt="" class="news-item__img" loading="lazy"></div><div class="news-item__content"><span class="news-item__category">Medio Ambiente</span><h3 class="news-item__title">El Amazonas registra su nivel de reforestación más alto en una década</h3><p class="news-item__excerpt">Brasil, Colombia y Perú muestran resultados tangibles con la recuperación de 12,000 km² de selva.</p><span class="news-item__meta">Por Sofía Valverde · Hace 10 horas</span></div></article>
+          </div>
+        </div>
+        <aside class="sidebar" id="sidebar-internacional"></aside>
+      </div></div>
+    </div>
+
+    <!-- ================================================================
+         PAGE: OPINIÓN
+         ================================================================ -->
+    <div class="page" id="page-opinion" data-page="opinion">
+      <div class="page-banner">
+        <img src="https://picsum.photos/seed/banner-op/1400/400" alt="Opinión" class="page-banner__img">
+        <div class="page-banner__content">
+          <span class="page-banner__category"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> Sección</span>
+          <h1 class="page-banner__title">Opinión</h1>
+          <p class="page-banner__desc">Las voces, columnas y análisis de nuestros editores y colaboradores.</p>
+        </div>
+      </div>
+      <div class="container">
+        <div class="opinion-grid reveal-stagger" style="padding:var(--space-8) 0;">
+          <article class="opinion-card reveal-child">
+            <img src="https://picsum.photos/seed/author1/200/200" alt="Carmen Aristegui" class="opinion-card__avatar" loading="lazy">
+            <h3 class="opinion-card__author">Carmen Aristegui</h3><span class="opinion-card__role">Editora Senior</span>
+            <p class="opinion-card__title">La democracia necesita ciudadanos informados, no algoritmos que decidan por nosotros</p>
+          </article>
+          <article class="opinion-card reveal-child">
+            <img src="https://picsum.photos/seed/author2/200/200" alt="Roberto García" class="opinion-card__avatar" loading="lazy">
+            <h3 class="opinion-card__author">Roberto García</h3><span class="opinion-card__role">Analista Económico</span>
+            <p class="opinion-card__title">El futuro de las criptomonedas: entre la regulación necesaria y la innovación financiera</p>
+          </article>
+          <article class="opinion-card reveal-child">
+            <img src="https://picsum.photos/seed/author3/200/200" alt="Marisol Peña" class="opinion-card__avatar" loading="lazy">
+            <h3 class="opinion-card__author">Marisol Peña</h3><span class="opinion-card__role">Corresponsal Internacional</span>
+            <p class="opinion-card__title">Multipolaridad y nuevos bloques: el tablero geopolítico que se redibuja en silencio</p>
+          </article>
+        </div>
+      </div>
+    </div>
+
+</div><!-- /main-content__center -->
+</main>
+
+<!-- ================================================================
+NEWSLETTER
+       ================================================================ -->
+  <section class="newsletter reveal" id="newsletter-section">
+    <svg class="newsletter__bg-pattern" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+      <defs><pattern id="news-grid" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+        <circle cx="20" cy="20" r="1" fill="#fff"/>
+      </pattern></defs>
+      <rect width="400" height="400" fill="url(#news-grid)"/>
+    </svg>
+    <div class="container">
+      <h2 class="newsletter__title">Mantente informado</h2>
+      <p class="newsletter__desc">Recibe cada mañana las noticias más importantes. Sin spam, solo información que importa.</p>
+      <form class="newsletter__form" id="newsletter-form">
+        <input type="email" class="newsletter__input" placeholder="tu@correo.com" aria-label="Correo electrónico" required id="newsletter-email">
+        <button type="submit" class="newsletter__btn" id="newsletter-submit">Suscribirme</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       FOOTER
+       ================================================================ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <a href="#inicio" class="masthead__logo" style="font-size:1.75rem;" data-nav="inicio">Agenda <span>Digital</span></a>
+          <p class="footer__brand-desc">Periodismo independiente y veraz. Comprometidos con la verdad y la transparencia desde 2024.</p>
+        </div>
+        <div><h4 class="footer__heading">Secciones</h4><div class="footer__links"><a href="#politica" data-nav="politica">Política</a><a href="#economia" data-nav="economia">Economía</a><a href="#deportes" data-nav="deportes">Deportes</a><a href="#tecnologia" data-nav="tecnologia">Tecnología</a><a href="#cultura" data-nav="cultura">Cultura</a><a href="#internacional" data-nav="internacional">Internacional</a></div></div>
+        <div><h4 class="footer__heading">Empresa</h4><div class="footer__links"><a href="#">Quiénes Somos</a><a href="#">Equipo Editorial</a><a href="#">Trabaja con Nosotros</a><a href="#">Contacto</a><a href="#">Publicidad</a></div></div>
+        <div><h4 class="footer__heading">Legal</h4><div class="footer__links"><a href="#">Términos de Uso</a><a href="#">Política de Privacidad</a><a href="#">Cookies</a><a href="#">Aviso Legal</a><a href="#">Código Ético</a></div></div>
+      </div>
+      <div class="footer__bottom"><span class="footer__copy">© 2025 Agenda Digital. Todos los derechos reservados.</span><div class="footer__bottom-links"><a href="#">Mapa del sitio</a><a href="#">RSS</a><a href="#">Accesibilidad</a></div></div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="back-to-top" aria-label="Volver arriba">↑</button>
+
+  <script src="index.js"></script>
+</body>
+</html>
